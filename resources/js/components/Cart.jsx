@@ -53,10 +53,14 @@ class Cart extends Component {
 
     loadCustomers() {
         const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
-        axios.get(`${baseUrl}admin/locale/customers`).then((res) => {
-            const customers = res.data;
-            this.setState({ customers });
-        });
+        axios.get(`${baseUrl}admin/customers`)
+            .then((res) => {
+                const customers = res.data;
+                this.setState({ customers });
+            })
+            .catch((error) => {
+                console.error("Error loading customers:", error);
+            });
     }
 
     loadProducts(search = "") {
